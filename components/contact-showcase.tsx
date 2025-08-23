@@ -1,5 +1,5 @@
 "use client"
-
+// contact details chnage krne kelioye yaha se kro yaha mail,call,whatsapp sab yaha chnage hoga//
 import type React from "react"
 
 import { useState } from "react"
@@ -8,20 +8,20 @@ const contactInfo = [
   {
     icon: "📞",
     title: "Phone",
-    details: ["+91 98765 43210", "+91 98765 43211"],
-    action: "tel:+919876543210",
+    details: ["+91 9304840306", "+91 9304840306"],
+    action: "tel:+9304840306",
   },
   {
     icon: "✉️",
     title: "Email",
-    details: ["info@primebuild.com", "sales@primebuild.com"],
-    action: "mailto:info@primebuild.com",
+    details: ["kr.yashansh123@gmail.com", "kr.yashansh123@gmail.com"],
+    action: "mailto:kr.yashansh123@gmail.com",
   },
   {
     icon: "💬",
     title: "WhatsApp",
-    details: ["+91 98765 43210"],
-    action: "https://wa.me/919876543210",
+    details: ["+91 9304840306"],
+    action: "https://wa.me/9304840306",
   },
   {
     icon: "📍",
@@ -85,7 +85,7 @@ export default function ContactShowcase() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Dummy form submission
-    alert("Thank you for your message! We will get back to you soon.")
+    alert("Thankyou for your message!We got lot of requests ⚠️so please fill Enquiry form(Form present on every Enquiry button on website thanks!!⚠️")
     setFormData({
       name: "",
       email: "",

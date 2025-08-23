@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
+
 // ye main page me jo flats hai uska edit krne keliye hai //
 const flatTypes = [
   {
@@ -61,12 +63,12 @@ export default function FlatCategories() {
           {flatTypes.map((flat) => (
             <div
               key={flat.id}
-              className="relative group cursor-pointer"
+              className="relative group cursor-pointer h-full"
               onMouseEnter={() => setHoveredFlat(flat.id)}
               onMouseLeave={() => setHoveredFlat(null)}
             >
               {/* Main Card */}
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover-lift">
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover-lift flex flex-col h-full">
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={flat.image || "/placeholder.svg"}
@@ -77,12 +79,12 @@ export default function FlatCategories() {
                     {flat.title}
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col justify-between flex-1">
                   <h3 className="font-work-sans font-semibold text-xl text-card-foreground mb-2">
                     {flat.title} Apartments
                   </h3>
                   <p className="text-muted-foreground mb-4">{flat.description}</p>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mt-auto">
                     <span className="text-primary font-semibold">{flat.startingPrice}</span>
                     <Link
                       href="https://forms.gle/78ShmAZWczpZkUyq8"
@@ -94,49 +96,75 @@ export default function FlatCategories() {
                 </div>
               </div>
 
-              {/* Hover Popup */}
-              <div
-                className={`absolute top-0 left-0 right-0 bg-white rounded-xl shadow-2xl border-2 border-secondary p-6 transition-all duration-300 z-10 ${
-                  hoveredFlat === flat.id
-                    ? "opacity-100 transform translate-y-0"
-                    : "opacity-0 transform translate-y-4 pointer-events-none"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-work-sans font-bold text-lg text-card-foreground">{flat.title} Details</h4>
-                  <span className="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs font-semibold">
-                    Popular
-                  </span>
-                </div>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Size:</span>
-                    <span className="font-semibold text-card-foreground">{flat.size}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Starting Price:</span>
-                    <span className="font-semibold text-primary">{flat.startingPrice}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Location:</span>
-                    <span className="font-semibold text-card-foreground">{flat.location}</span>
-                  </div>
-                </div>
-                <div className="flex gap-2 mt-4">
-                  <Link
-                    href={`/flats#${flat.id}`}
-                    className="flex-1 bg-primary text-primary-foreground px-3 py-2 rounded-lg text-sm font-semibold text-center hover:bg-accent transition-colors duration-200"
+              {/* Hover Popup with Framer Motion */}
+              <AnimatePresence>
+                {hoveredFlat === flat.id && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 30, rotate: -2 }}
+                    animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute top-0 left-0 right-0 bg-white rounded-xl shadow-2xl border-2 border-secondary p-6 z-10"
                   >
-                    Quick View
-                  </Link>
-                  <Link
-                    href="https://forms.gle/78ShmAZWczpZkUyq8"
-                    className="flex-1 bg-secondary text-secondary-foreground px-3 py-2 rounded-lg text-sm font-semibold text-center hover:bg-accent transition-colors duration-200"
-                  >
-                    Enquiry
-                  </Link>
-                </div>
-              </div>
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="font-work-sans font-bold text-lg text-card-foreground">
+                        {flat.title} Details
+                      </h4>
+                      <span className="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs font-semibold animate-pulse">
+                        Popular
+                      </span>
+                    </div>
+
+                    {/* Staggered content */}
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        hidden: {},
+                        visible: { transition: { staggerChildren: 0.1 } },
+                      }}
+                      className="space-y-3 text-sm"
+                    >
+                      <motion.div
+                        variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                        className="flex justify-between"
+                      >
+                        <span className="text-muted-foreground">Size:</span>
+                        <span className="font-semibold text-card-foreground">{flat.size}</span>
+                      </motion.div>
+                      <motion.div
+                        variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                        className="flex justify-between"
+                      >
+                        <span className="text-muted-foreground">Starting Price:</span>
+                        <span className="font-semibold text-primary">{flat.startingPrice}</span>
+                      </motion.div>
+                      <motion.div
+                        variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                        className="flex justify-between"
+                      >
+                        <span className="text-muted-foreground">Location:</span>
+                        <span className="font-semibold text-card-foreground">{flat.location}</span>
+                      </motion.div>
+                    </motion.div>
+
+                    <div className="flex gap-2 mt-4">
+                      <Link
+                        href={`/flats#${flat.id}`}
+                        className="flex-1 bg-primary text-primary-foreground px-3 py-2 rounded-lg text-sm font-semibold text-center hover:bg-accent transition-colors duration-200"
+                      >
+                        Quick View
+                      </Link>
+                      <Link
+                        href="https://forms.gle/78ShmAZWczpZkUyq8"
+                        className="flex-1 bg-secondary text-secondary-foreground px-3 py-2 rounded-lg text-sm font-semibold text-center hover:bg-accent transition-colors duration-200"
+                      >
+                        Enquiry
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>

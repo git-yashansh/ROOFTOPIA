@@ -199,7 +199,7 @@ const PillNav: React.FC<PillNavProps> = ({
     ["--pill-pad-x"]: "18px",
     ["--pill-gap"]: "3px",
   } as React.CSSProperties
-
+// navihation ka logon yaha se chnage kiye h //
   return (
     <div className="fixed top-4 z-[1000] w-full left-0 md:w-auto md:left-1/2 md:-translate-x-1/2">
       <nav className={`w-full md:w-max flex items-center justify-between md:justify-start box-border px-4 md:px-0 ${className}`} aria-label="Primary" style={cssVars}>

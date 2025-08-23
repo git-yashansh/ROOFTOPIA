@@ -1,5 +1,5 @@
 "use client"
-
+////loading ka time chnage yaha se krna hoga comment add kiya gaya h or laoding spinner ko bhi yaha se chnage kiye h ham//
 import { useState, useEffect } from "react"
 import Image from "next/image"
 
@@ -7,7 +7,7 @@ export default function LoadingSpinner() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 5000) // 5 seconds
+    const timer = setTimeout(() => setIsLoading(false), 3000) // 5 seconds
     return () => clearTimeout(timer)
   }, [])
 

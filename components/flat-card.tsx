@@ -199,7 +199,7 @@ export default function FlatCard({ flat }: FlatCardProps) {
             📋 Enquiry
           </a>
           <a
-            href={`https://wa.me/919876543210?text=Hi, I'm interested in ${flat.title}`}
+            href={`https://wa.me/9304840306?text=Hi, I'm interested in ${flat.title}`}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-500 text-white px-4 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 text-center"

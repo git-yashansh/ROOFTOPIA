@@ -65,10 +65,10 @@ export default function Footer() {
               <div className="flex items-center space-x-2">
                 <span>📞</span>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+9304840306"
                   className="text-primary-foreground/80 hover:text-secondary transition-colors duration-200"
                 >
-                  +91 98765 43210
+                  +91 9304840306
                 </a>
               </div>
               <div className="flex items-center space-x-2">
@@ -77,13 +77,13 @@ export default function Footer() {
                   href="mailto:info@primebuild.com"
                   className="text-primary-foreground/80 hover:text-secondary transition-colors duration-200"
                 >
-                  info@primebuild.com
+                  kr.yashansh123@gmail.com
                 </a>
               </div>
               <div className="flex items-center space-x-2">
                 <span>💬</span>
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/9304840306"
                   className="text-primary-foreground/80 hover:text-secondary transition-colors duration-200"
                 >
                   WhatsApp Us
@@ -132,7 +132,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-primary-foreground/20 text-center">
           <p className="text-primary-foreground/80 text-sm">
-            © 2025 ROOFTOPIA Apartments. All rights reserved. | Managed by Nexora ֎🇦🇮 - Next-gen, Versatile Tech brand by Kumar yashansh ֎. 
+            © 2025 ROOFTOPIA Apartments. All rights reserved. | Managed by NexoraAI ֎ - Next-gen, Versatile Tech brand by Kumar yashansh ֎. 
             <Link href="/privacy" className="hover:text-secondary transition-colors duration-200 ml-1">
               Privacy Policy
             </Link>{" "}

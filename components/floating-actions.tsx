@@ -22,7 +22,7 @@ export default function FloatingActions() {
       {/* Quick Action Buttons */}
       <div className="fixed right-4 bottom-20 z-40 flex flex-col gap-3">
         <a
-          href="tel:+919876543210"
+          href="tel:+9304840306"
           className="bg-primary text-primary-foreground w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-accent transition-all duration-300 hover:scale-110 group"
           title="Call Now"
         >

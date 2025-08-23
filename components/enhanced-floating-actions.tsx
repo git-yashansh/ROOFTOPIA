@@ -19,14 +19,14 @@ export default function EnhancedFloatingActions() {
     {
       icon: <Phone size={22} />,
       label: "Call Now",
-      href: "tel:+919876543210",
+      href: "tel:+9304840306",
       bg: "bg-black hover:bg-white",
       color: "text-white hover:text-black",
     },
     {
       icon: <MessageCircle size={22} />,
       label: "WhatsApp",
-      href: "https://wa.me/919876543210?text=Hi, I'm interested in your apartments",
+      href: "https://wa.me/9304840306?text=Hi, I'm interested in your apartments",
       bg: "bg-green-500 hover:bg-green-600",
       color: "text-white",
     },

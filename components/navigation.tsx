@@ -40,16 +40,16 @@ export default function Navigation() {
 
       <div className="fixed top-20 right-4 z-40 flex flex-col gap-2">
         <a
-          href="tel:+919876543210"
+          href="tel:+9304840306"
           className="bg-secondary text-secondary-foreground px-4 py-2 rounded-full font-semibold hover:bg-accent transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
         >
           📞 Call Now
         </a>
         <Link
-          href="/contact"
+          href="https://forms.gle/78ShmAZWczpZkUyq8"
           className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm"
         >
-          Get Quote
+          Enquiry Now!
         </Link>
       </div>
     </>
