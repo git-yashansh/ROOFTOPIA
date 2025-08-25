@@ -74,7 +74,7 @@ export default function Footer() {
               <div className="flex items-center space-x-2">
                 <span>✉️</span>
                 <a
-                  href="mailto:info@primebuild.com"
+                  href="mailto:kr.yashansh123@gmail.com"
                   className="text-primary-foreground/80 hover:text-secondary transition-colors duration-200"
                 >
                   kr.yashansh123@gmail.com
@@ -132,11 +132,20 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-primary-foreground/20 text-center">
           <p className="text-primary-foreground/80 text-sm">
-            © 2025 ROOFTOPIA Apartments. All rights reserved. | Managed by NexoraAI ֎ - Next-gen, Versatile Tech brand by Kumar yashansh ֎. 
+            © 2025 ROOFTOPIA Apartments. All rights reserved. |{" "}
+            <a
+              href="https://nexora-ai-tan.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-secondary transition duration-300 transform hover:scale-105 hover:underline cursor-pointer"
+            >
+              Managed by NexoraAI ֎ - Next-gen, Versatile Tech brand by Kumar yashansh ֎
+            </a>{" "}
+            |{" "}
             <Link href="/privacy" className="hover:text-secondary transition-colors duration-200 ml-1">
               Privacy Policy
             </Link>{" "}
-            |
+            |{" "}
             <Link href="/terms" className="hover:text-secondary transition-colors duration-200 ml-1">
               Terms of Service
             </Link>
