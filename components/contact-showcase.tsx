@@ -1,7 +1,5 @@
 "use client"
-// contact details chnage krne kelioye yaha se kro yaha mail,call,whatsapp sab yaha chnage hoga//
 import type React from "react"
-
 import { useState } from "react"
 
 const contactInfo = [
@@ -74,25 +72,47 @@ export default function ContactShowcase() {
     message: "",
   })
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Dummy form submission
-    alert("Thankyou for your message!We got lot of requests ⚠️so please fill Enquiry form(Form present on every Enquiry button on website thanks!!⚠️")
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    })
+
+    try {
+      const response = await fetch("https://formspree.io/f/xeolqqzr", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setIsSubmitted(true)
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        })
+        setTimeout(() => setIsSubmitted(false), 3000)
+      } else {
+        alert("Failed to send message. Please try again.")
+      }
+    } catch (err) {
+      console.error(err)
+      alert("Failed to send message. Please try again.")
+    }
   }
 
   const toggleFaq = (index: number) => {
@@ -104,7 +124,9 @@ export default function ContactShowcase() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="font-work-sans font-bold text-4xl md:text-5xl text-foreground mb-6">Contact Us</h1>
+          <h1 className="font-work-sans font-bold text-4xl md:text-5xl text-foreground mb-6">
+            Contact Us
+          </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Get in touch with our team for any inquiries about our premium apartments and properties
           </p>
@@ -113,7 +135,9 @@ export default function ContactShowcase() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Contact Information */}
           <div>
-            <h2 className="font-work-sans font-bold text-2xl text-foreground mb-8">Get In Touch</h2>
+            <h2 className="font-work-sans font-bold text-2xl text-foreground mb-8">
+              Get In Touch
+            </h2>
 
             {/* Contact Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -121,7 +145,9 @@ export default function ContactShowcase() {
                 <div key={index} className="bg-card rounded-lg p-6 shadow-lg hover-lift">
                   <div className="flex items-center mb-4">
                     <span className="text-3xl mr-3">{info.icon}</span>
-                    <h3 className="font-work-sans font-semibold text-lg text-card-foreground">{info.title}</h3>
+                    <h3 className="font-work-sans font-semibold text-lg text-card-foreground">
+                      {info.title}
+                    </h3>
                   </div>
                   <div className="space-y-1">
                     {info.details.map((detail, idx) => (
@@ -161,111 +187,136 @@ export default function ContactShowcase() {
 
           {/* Contact Form */}
           <div>
-            <h2 className="font-work-sans font-bold text-2xl text-foreground mb-8">Send us a Message</h2>
-            <p className="text-sm italic text-red-500 mb-6 flex items-center">
-            <span className="mr-2">⚠️</span>
-              Important: Please fill the enquiry form present on every enquiry button on the website.⚠️Avoid filling this bottom form👇due to website maintenance!!
-            </p>
-            <form onSubmit={handleSubmit} className="bg-card rounded-lg p-6 shadow-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-card-foreground mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your email"
-                  />
-                </div>
-              </div>
+            <h2 className="font-work-sans font-bold text-2xl text-foreground mb-8">
+              Send us a Message
+            </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-card-foreground mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your phone number"
-                  />
+            {isSubmitted ? (
+              <div className="text-center py-12 bg-card rounded-lg shadow-lg">
+                <h3 className="text-xl font-semibold text-green-600 mb-2">✅ Message Sent!</h3>
+                <p className="text-muted-foreground">
+                  Thanks for reaching out. We’ll get back to you soon.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="bg-card rounded-lg p-6 shadow-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-card-foreground mb-2"
+                    >
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-card-foreground mb-2"
+                    >
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="Enter your email"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-card-foreground mb-2">
-                    Subject
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-card-foreground mb-2"
+                    >
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="subject"
+                      className="block text-sm font-medium text-card-foreground mb-2"
+                    >
+                      Subject
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="booking">Booking Information</option>
+                      <option value="site-visit">Schedule Site Visit</option>
+                      <option value="payment">Payment Related</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-card-foreground mb-2"
                   >
-                    <option value="">Select a subject</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="booking">Booking Information</option>
-                    <option value="site-visit">Schedule Site Visit</option>
-                    <option value="payment">Payment Related</option>
-                    <option value="other">Other</option>
-                  </select>
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-vertical"
+                    placeholder="Tell us about your requirements..."
+                  ></textarea>
                 </div>
-              </div>
 
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-card-foreground mb-2">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-vertical"
-                  placeholder="Tell us about your requirements..."
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-accent transition-colors duration-200"
-              >
-                Send Message
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-accent transition-colors duration-200"
+                >
+                  Send Message
+                </button>
+              </form>
+            )}
           </div>
         </div>
 
         {/* Google Maps */}
         <div className="mb-16">
-          <h2 className="font-work-sans font-bold text-2xl text-foreground mb-8 text-center">Find Our Office</h2>
+          <h2 className="font-work-sans font-bold text-2xl text-foreground mb-8 text-center">
+            Find Our Office
+          </h2>
           <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.9999999999995!2d72.8777!3d19.0760!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA0JzMzLjYiTiA3MsKwNTInMzkuNyJF!5e0!3m2!1sen!2sin!4v1234567890"
